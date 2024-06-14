@@ -1,0 +1,22 @@
+{% extends "sandbox/base.html" %}
+
+{% block content %}
+<h1>Blog Home!</h1>
+
+<article class="media content-section">
+    <img src="{{object.author.profile.image.url}}" class="rounded-circle article-img">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted}}</small>
+            {% if object.author == user %}
+            <a href="{% url 'post-update' object.id %}" class=" btn btn-outline-secondary btn-sm mt-1">Update</a>
+            <a href="{% url 'post-delete' object.id %}" class=" btn btn-outline-danger btn-sm mt-1">Delete</a>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+</article>
+
+{% endblock content %}
